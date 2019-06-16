@@ -1,0 +1,149 @@
+[
+    {
+        "comment": "Test #1",
+        "original": ["a", "b", "c", "d"],
+        "target": [1, "a", "c", "d", 2],
+        "patch": [
+            {"op": "add", "path": "/0", "value": 1},
+            {"op": "remove", "path": "/2"},
+            {"op": "add", "path": "/4", "value": 2}
+        ]
+    }, {
+        "comment": "Test #2",
+        "original": ["a", "b", "c"],
+        "target": ["c", 1, 2, "a", 3],
+        "patch": [
+            {"op": "add", "path": "/0", "value": "c"},
+            {"op": "add", "path": "/1", "value": 1},
+            {"op": "add", "path": "/2", "value": 2},
+            {"op": "remove", "path": "/4"},
+            {"op": "replace", "path": "/4", "value": 3}
+        ]
+    }, {
+        "comment": "Test removing center element",
+        "original": ["a", "b", "c"],
+        "target": ["a", "c"],
+        "patch": [
+            {"op": "remove", "path": "/1"}
+        ]
+    }, {
+        "comment": "Test adding center element",
+        "original": ["a", "c"],
+        "target": ["a", "b", "c"],
+        "patch": [
+            {"op": "add", "path": "/1", "value": "b"}
+        ]
+    }, {
+        "comment": "Test adding element to end",
+        "original": ["a", "b"],
+        "target": ["a", "b", "c"],
+        "patch": [
+            {"op": "add", "path": "/2", "value": "c"}
+        ]
+    }, {
+        "comment": "Test adding element to start",
+        "original": ["a", "b"],
+        "target": ["0", "a", "b"],
+        "patch": [
+            {"op": "add", "path": "/0", "value": "0"}
+        ]
+    }, {
+        "comment": "Test removing last element",
+        "original": ["a", "b", "c"],
+        "target": ["a", "b"],
+        "patch": [
+            {"op": "remove", "path": "/2"}
+        ]
+    }, {
+        "comment": "Test removing first element",
+        "original": ["a", "b", "c"],
+        "target": ["b", "c"],
+        "patch": [
+            {"op": "remove", "path": "/0"}
+        ]
+    }, {
+        "comment": "Test adding elements around",
+        "original": ["a", "b"],
+        "target": ["x", "a", "b", "y"],
+        "patch": [
+            {"op": "add", "path": "/0", "value": "x"},
+            {"op": "add", "path": "/3", "value": "y"}
+        ]
+    }, {
+        "comment": "Test adding elements around",
+        "original": ["x", "a", "b", "y"],
+        "target": ["a", "b"],
+        "patch": [
+            {"op": "remove", "path": "/0"},
+            {"op": "remove", "path": "/2"}
+        ]
+    }, {
+        "comment": "Test adding multiple elements around",
+        "original": ["a"],
+        "target": ["1", "2", "a", "3", "4"],
+        "patch": [
+            {"op": "add", "path": "/0", "value": "1"},
+            {"op": "add", "path": "/1", "value": "2"},
+            {"op": "add", "path": "/3", "value": "3"},
+            {"op": "add", "path": "/4", "value": "4"}
+        ]
+    }, {
+        "comment": "Test removing multiple elements around",
+        "original": ["1", "2", "a", "3", "4"],
+        "target": ["a"],
+        "patch": [
+            {"op": "remove", "path": "/0"},
+            {"op": "remove", "path": "/0"},
+            {"op": "remove", "path": "/1"},
+            {"op": "remove", "path": "/1"}
+        ]
+    }, {
+        "comment": "Test adding elements to empty array",
+        "original": [],
+        "target": ["a", "b"],
+        "patch": [
+            {"op": "add", "path": "/0", "value": "a"},
+            {"op": "add", "path": "/1", "value": "b"}
+        ]
+    }, {
+        "comment": "Test removing all elements",
+        "original": ["a", "b"],
+        "target": [],
+        "patch": [
+            {"op": "remove", "path": "/0"},
+            {"op": "remove", "path": "/0"}
+        ]
+    }, {
+        "comment": "Test replace",
+        "original": ["a"],
+        "target": ["b"],
+        "patch": [
+            {"op": "replace", "path": "/0", "value": "b"}
+        ]
+    }, {
+        "comment": "Test replace from array to object",
+        "original": [["a"]],
+        "target": [{"foo": "a"}],
+        "patch": [
+            {"op": "replace", "path": "/0", "value": {"foo": "a"}}
+        ]
+    }, {
+        "comment": "Test replace multiple",
+        "original": ["a", "b", "c"],
+        "target": ["x", "y", "z"],
+        "patch": [
+            {"op": "remove", "path": "/0"},
+            {"op": "remove", "path": "/0"},
+            {"op": "replace", "path": "/0", "value": "x"},
+            {"op": "add", "path": "/1", "value": "y"},
+            {"op": "add", "path": "/2", "value": "z"}
+        ]
+    }, {
+        "comment": "Test editing object in array",
+        "original": [1, 2, {"a": "a", "b": "b"}],
+        "target": [1, 2, {"a": "c", "b": "b"}],
+        "patch": [
+            {"op": "replace", "path": "/2/a", "value": "c"}
+        ]
+    }
+]
