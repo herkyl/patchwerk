@@ -55,7 +55,7 @@ func NewPatch(operation, path string, value interface{}) *JSONPatchOperation {
 // The function will return an array of JSONPatchOperations
 //
 // An error will be returned if any of the two documents are invalid.
-func Diff(a, b []byte) ([]*JSONPatchOperation, error) {
+func Diff(a, b []byte) ([]byte, error) {
 	var aI interface{}
 	var bI interface{}
 
@@ -68,7 +68,11 @@ func Diff(a, b []byte) ([]*JSONPatchOperation, error) {
 		return nil, errBadJSONDoc
 	}
 
-	return diff(aI, bI, "")
+	ops, err := diff(aI, bI, "")
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(ops)
 }
 
 // From http://tools.ietf.org/html/rfc6901#section-4 :
