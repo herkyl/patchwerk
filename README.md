@@ -1,6 +1,8 @@
 # Patchwerk
-
 ![Patchwerk logo](https://github.com/herkyl/patchwerk/blob/master/patchwerk.jpg)
+
+## Go JSON patch
+[![Build Status](https://travis-ci.org/herkyl/patchwerk.svg?branch=master)](https://travis-ci.org/herkyl/patchwerk)
 
 Use Patchwerk to create [RFC6902 JSON patches](https://tools.ietf.org/html/rfc6902).
 
