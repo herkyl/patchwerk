@@ -2,6 +2,7 @@ package patchwerk
 
 import (
 	"fmt"
+	"sort"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -28,6 +29,8 @@ func TestReplaceObjectInArray(t *testing.T) {
 	assert.NoError(t, e)
 	t.Log("PATCH:", patch)
 	assert.Equal(t, 2, len(patch))
+
+	sort.Sort(ByPath(patch))
 	p1 := patch[0]
 	assert.Equal(t, "replace", p1.Operation)
 	assert.Equal(t, "/2/b", p1.Path)
