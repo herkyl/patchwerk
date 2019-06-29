@@ -53,9 +53,7 @@ func NewPatch(operation, path string, value interface{}) *JSONPatchOperation {
 //
 // 'a' is original, 'b' is the modified document. Both are to be given as json encoded content.
 // The function will return an array of JSONPatchOperations
-//
-// An error will be returned if any of the two documents are invalid.
-func Diff(a, b []byte) ([]byte, error) {
+func Diff(a, b []byte) ([]*JSONPatchOperation, error) {
 	var aI interface{}
 	var bI interface{}
 
@@ -68,7 +66,15 @@ func Diff(a, b []byte) ([]byte, error) {
 		return nil, errBadJSONDoc
 	}
 
-	ops, err := diff(aI, bI, "")
+	return diff(aI, bI, "")
+}
+
+// DiffBytes creates a patch as specified in http://jsonpatch.com/
+//
+// 'a' is original, 'b' is the modified document. Both are to be given as json encoded content.
+// The function will return JSON as a byte array
+func DiffBytes(a, b []byte) ([]byte, error) {
+	ops, err := Diff(a, b)
 	if err != nil {
 		return nil, err
 	}

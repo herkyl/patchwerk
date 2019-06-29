@@ -28,13 +28,12 @@ import (
 func main() {
 	a := `{"a":100, "b":200}`
 	b := `{"a":100, "b":200, "c":300}`
-	patch, err := patchwerk.Diff([]byte(a), []byte(b))
+	patch, err := patchwerk.DiffBytes([]byte(a), []byte(b))
 	if err != nil {
-		fmt.Printf("Error creating JSON patch:%v", e)
+		fmt.Printf("Error creating JSON patch: %v", err)
 		return
 	}
-	for _, op := range patch {
-		fmt.Printf("%s\n", op.Json()) // [{"op": "add", "path": "/c", "value": 300}]
-	}
+	fmt.Println(string(patch)) // [{"op": "add", "path": "/c", "value": 300}]
 }
+
 ```
